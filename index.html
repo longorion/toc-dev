@@ -157,7 +157,7 @@
     asperiores doloremque placeat. Laboriosam maxime sit eveniet odio perspiciatis accusantium facere minus deserunt
     veniam, qui, amet laudantium dicta repellendus vitae, sint rem dolore aliquam dignissimos ad suscipit non voluptate
     magni. Nesciunt.</p>
-  <h2>Công ty cho thuê văn phòng</h2>
+  <h2 id="ctctvp">Công ty cho thuê văn phòng</h2>
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae est nam unde earum laborum accusamus quas fugiat at,
     eum quaerat itaque voluptatem similique non quis impedit blanditiis? Quis corrupti unde soluta. Quam modi blanditiis
     aspernatur veritatis ipsam iure voluptatibus fuga architecto autem quidem. Eaque, quae eum! Ut maxime, natus impedit
@@ -192,10 +192,15 @@
     maiores culpa earum accusamus delectus consectetur? Quam suscipit fugit perferendis dolorem eaque necessitatibus
     eligendi impedit? Sint delectus quam molestiae error cum minus unde sit. Rerum ipsa natus cupiditate ut harum.
     Autem.</p>
+    <h3 id="ctyctvp_uytin">Cty cho thuê văn phòng uy tín</h3>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere deleniti reprehenderit recusandae ipsam quae, amet quaerat asperiores delectus nesciunt, doloribus repellat animi culpa vel pariatur quos accusantium tempore officiis ut corporis distinctio? Ullam, sint. Iure omnis ducimus adipisci asperiores quas quidem, molestiae delectus provident quasi magni corrupti nobis nemo ipsum a perferendis totam eligendi impedit consequatur repellat laborum. Vero aliquid possimus fugiat, dignissimos adipisci illum eveniet? Impedit, cumque iste. Ducimus corrupti fugit culpa nihil deleniti facilis, atque possimus dolor pariatur magnam consectetur eius porro saepe maiores excepturi ut, voluptate illum. Doloremque sint recusandae cumque vitae error porro tempora corrupti aliquid, excepturi est minima velit qui omnis. Mollitia quos eaque tenetur odit quia soluta. In itaque recusandae vel sapiente asperiores! Beatae officiis repudiandae impedit alias consectetur quas atque ratione deserunt, ipsum eaque rerum voluptatum qui consequuntur a omnis corporis perspiciatis nam cumque consequatur et excepturi. Dolor repudiandae minus adipisci at necessitatibus tenetur officia mollitia est laborum aspernatur amet quas, dicta ducimus maiores accusantium vero similique aliquam ea modi cum unde. Repellendus iure vitae aspernatur assumenda debitis adipisci, expedita vero pariatur earum voluptatibus corrupti quod illo perferendis incidunt dolorem reiciendis quas tenetur eius sapiente quo provident ipsum consequatur repudiandae. Facere, cupiditate quibusdam.</p>
+    <h3 id="lh_officesaigon">Liên hệ ngay Office Saigon</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error fuga id eum dignissimos architecto vitae illo aspernatur illum magni, rerum assumenda deserunt necessitatibus ducimus, quasi facere, sit veritatis iusto? Animi, illum rerum illo corrupti adipisci, cumque repudiandae accusantium quam nam, accusamus magni voluptatibus ipsum incidunt dolorem earum natus labore dolor id? Eligendi ratione quos asperiores distinctio facere aperiam impedit dicta debitis inventore possimus et sint iure provident quis amet, labore ipsum odio laudantium recusandae? Natus dolor adipisci repellat beatae iure quis ipsam nesciunt repellendus error voluptatibus nisi rem facere dolores quam porro perferendis, eius laborum et id blanditiis iusto quaerat? Eveniet voluptatibus culpa dignissimos est debitis, nemo, enim tempore officiis eaque fuga magni provident porro, suscipit ipsum quia tempora illo adipisci explicabo placeat fugiat alias ipsa nisi distinctio? Quas modi magnam tempore dolore! Consequatur reiciendis labore consequuntur culpa incidunt cumque expedita, asperiores fugiat dolorem, quasi quos inventore velit dolor repellat! Illo reprehenderit odio repellat eum iusto doloribus doloremque eos eaque! At exercitationem soluta cum eum beatae? Sint, ea fugiat alias earum quam eveniet perspiciatis consequuntur quo eius, cupiditate suscipit sequi facere odio laudantium ipsum aperiam. Soluta repudiandae optio voluptas voluptatibus ad, similique, nostrum consequatur cumque eius incidunt, doloribus atque porro aspernatur! Quisquam corporis, cumque natus odit repellat maiores architecto veniam ratione culpa similique iusto accusantium modi quos enim quaerat neque illum amet animi consequatur, tempore officiis blanditiis ducimus nihil. Dolore sunt ex quam veniam obcaecati, accusantium ut sed, in asperiores assumenda nostrum aliquam pariatur quis magnam consectetur minus soluta molestiae optio adipisci aut nulla ratione. Similique, non? Magnam ullam recusandae, facere esse perspiciatis fugiat mollitia iste quisquam illum impedit! Quis repellat et ducimus aspernatur est amet tempore, eum labore omnis illo optio mollitia enim dolores voluptates dignissimos beatae laborum, facilis voluptatibus sint obcaecati quos? Aspernatur accusamus voluptas repellat sequi cum!</p>
+
 
 
   <script>
-    // Lấy tất cả các tiêu đề trong bài viết
+    // Lấy tất cả các tiêu đề h2 và h3 trong bài viết
     const headings = document.querySelectorAll('h2, h3');
 
     // Tạo container cho mục lục
@@ -220,8 +225,50 @@
       tocLink.href = '#' + heading.id;
       tocLink.textContent = heading.textContent;
       tocItem.appendChild(tocLink);
+
+      // Thêm thụt dòng cho h3
+      if (heading.tagName === 'H3') {
+        tocItem.style.paddingLeft = '20px'; // Chỉnh sửa độ thụt dòng cho h3
+      }
+
       tocList.appendChild(tocItem);
     }
+
+
+
+    // Đoạn code thay gắn số thự tự cho TOC
+
+    const toc = document.getElementById('toc'); // Lấy element TOC
+    const tocList1 = toc.querySelector('ul'); // Lấy danh sách mục lục
+    const headings1 = tocList1.querySelectorAll('li'); // Lấy tất cả các mục trong danh sách
+
+    // Biến để theo dõi số thứ tự
+    let mainCounter = 1;
+    let subCounter = 1;
+    let mainCounter_forSub = 1;
+
+    // Duyệt qua từng mục trong danh sách
+    for (const heading of headings1) {
+      // Xác định xem mục là mục chính hay mục con
+      const isMainHeading = !heading.style.paddingLeft;
+
+      // Tạo element liên kết
+      const link = heading.querySelector('a');
+
+      // Đánh số cho mục
+      if (isMainHeading) {
+        link.textContent = `${mainCounter}. ${link.textContent}`;
+        mainCounter++; // Tăng số thứ tự mục chính
+        subCounter = 1; // Reset số thứ tự mục con
+        mainCounter_forSub = mainCounter-1; // Lấy đúng số thứ tự của heading cha
+      } else {
+        // link.textContent = `${mainCounter}.${subCounter}. ${link.textContent}`;
+        link.textContent = `${mainCounter_forSub}.${subCounter}. ${link.textContent}`;
+        subCounter++; // Tăng số thứ tự mục con
+      }
+    }
+
+
 
   </script>
 

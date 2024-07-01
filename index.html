@@ -318,7 +318,7 @@
 
     // Tạo tiêu đề cho mục lục
     const tocTitle = document.createElement('h2');
-    tocTitle.textContent = 'Mục lục';
+    tocTitle.textContent = 'Nội dung chính';
     tocContainer.appendChild(tocTitle);
 
     // Tạo danh sách mục lục
@@ -332,6 +332,7 @@
       const tocLink = document.createElement('a');
       tocLink.href = '#' + heading.id;
       tocLink.textContent = heading.textContent;
+      tocLink.title = heading.textContent;
       tocItem.appendChild(tocLink);
 
       // Thêm thụt dòng cho h3

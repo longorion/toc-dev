@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>TOC auto for Blog by Long Orion</title>
 </head>
 
 <body>
@@ -35,7 +35,9 @@
       necessitatibus nisi incidunt doloremque quos vero sed aliquam itaque.</p>
   </div>
 
-  <div class="content">
+  <div id="toc_main"></div>
+
+  <div class="content for_toc">
     <h2 id="tvplm">Thuê văn phòng làm việc</h2>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim quisquam numquam omnis aspernatur consequatur
       explicabo debitis impedit quasi consequuntur nam, nulla ipsa, perspiciatis eum magni vitae amet voluptas
@@ -305,15 +307,16 @@
 
 
   <script>
-    // Lấy tất cả các tiêu đề h2 và h3 trong bài viết
-    // const headings = document.querySelectorAll('h2, h3');
-
-    // Lấy tất cả các tiêu đề h2 và h3 trong class "content"
-    const headings = document.querySelectorAll('.content h2, .content h3');
-
+    // Lấy tất cả các tiêu đề h2 và h3 trong class "for_toc"
+    const headings = document.querySelectorAll('.for_toc h2, .for_toc h3');
     // Tạo container cho mục lục
     const tocContainer = document.createElement('div');
     tocContainer.id = 'toc';
+    // trường hợp lấy div toc có sẵn, áp dụng cho muốn gán div toc vị trí bất kỳ trên trang
+    // const tocContainer = document.getElementById('toc');
+
+    // class toc_auto phuc vu cho trang osg
+    tocContainer.classList = 'toc_auto mauvanban';
     document.body.appendChild(tocContainer);
 
     // Tạo tiêu đề cho mục lục
@@ -325,28 +328,27 @@
     const tocList = document.createElement('ul');
     tocContainer.appendChild(tocList);
 
+    // lấy url
+    const fullUrl = window.location.href;
+    const baseUrl = fullUrl.split('#')[0];
+
     // Duyệt qua từng tiêu đề
     for (const heading of headings) {
       // Tạo mục cho danh sách
       const tocItem = document.createElement('li');
       const tocLink = document.createElement('a');
-      tocLink.href = '#' + heading.id;
+      tocLink.href = baseUrl + '#' + heading.id;
       tocLink.textContent = heading.textContent;
       tocLink.title = heading.textContent;
       tocItem.appendChild(tocLink);
-
       // Thêm thụt dòng cho h3
       if (heading.tagName === 'H3') {
         tocItem.style.paddingLeft = '20px'; // Chỉnh sửa độ thụt dòng cho h3
       }
-
       tocList.appendChild(tocItem);
     }
 
-
-
-    // Đoạn code thay gắn số thự tự cho TOC
-
+    // Đoạn code gắn số thự tự cho TOC
     const toc = document.getElementById('toc'); // Lấy element TOC
     const tocList1 = toc.querySelector('ul'); // Lấy danh sách mục lục
     const headings1 = tocList1.querySelectorAll('li'); // Lấy tất cả các mục trong danh sách
@@ -360,27 +362,30 @@
     for (const heading of headings1) {
       // Xác định xem mục là mục chính hay mục con
       const isMainHeading = !heading.style.paddingLeft;
-
       // Tạo element liên kết
       const link = heading.querySelector('a');
 
       // Đánh số cho mục
       if (isMainHeading) {
-        link.textContent = `${mainCounter}. ${link.textContent}`;
+        link.textContent = mainCounter + '. ' + link.textContent;
         mainCounter++; // Tăng số thứ tự mục chính
         subCounter = 1; // Reset số thứ tự mục con
         mainCounter_forSub = mainCounter - 1; // Lấy đúng số thứ tự của heading cha
       } else {
-        // link.textContent = `${mainCounter}.${subCounter}. ${link.textContent}`;
-        link.textContent = `${mainCounter_forSub}.${subCounter}. ${link.textContent}`;
+        link.textContent = mainCounter_forSub + '.' + subCounter + '. ' + link.textContent;
         subCounter++; // Tăng số thứ tự mục con
       }
     }
 
-
-
+    // Copy nội dung chuyển qua thẻ div TOC_MAIN trong cms
+    const tocSource = document.getElementById('toc');
+    const tocMain = document.getElementById('toc_main');
+    if(tocMain) {
+        const tocContent = tocSource.outerHTML;
+        tocMain.innerHTML = tocContent;
+    }
+    tocSource.parentNode.removeChild(tocSource);
   </script>
 
 </body>
-
 </html>

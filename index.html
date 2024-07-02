@@ -305,8 +305,16 @@
       voluptas repellat sequi cum!</p>
   </div>
 
-
   <script>
+    // tạm thời chưa cho đoạn script TOC tự động này chạy
+    // return false;
+    
+    // Xóa TOC cũ trước
+    const mauvanbanDiv = document.querySelector('.mauvanban');
+    if (mauvanbanDiv) {
+        mauvanbanDiv.parentNode.removeChild(mauvanbanDiv);
+    }
+
     // Lấy tất cả các tiêu đề h2 và h3 trong class "for_toc"
     const headings = document.querySelectorAll('.for_toc h2, .for_toc h3');
     // Tạo container cho mục lục
